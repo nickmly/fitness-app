@@ -73,7 +73,19 @@ export default {
   },
   methods: {
     showExerciseList() {
-      this.addingExercise = true;
+      if (this.log.length === 0) {
+        // if there is no log for today then add one
+        axios
+          .post("http://localhost:8000/log", {
+            uid: this.$store.state.user.uid,
+            date: new Date().toLocaleDateString(),
+          })
+          .then((_) => {
+            this.addingExercise = true;
+          });
+      } else {
+        this.addingExercise = true;
+      }
     },
     showSetForm(id) {
       this.addingSet = id;
