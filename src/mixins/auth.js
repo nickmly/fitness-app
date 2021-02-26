@@ -7,9 +7,10 @@ const authMixin = {
       loggedIn: false,
     };
   },
-  created() {
+  beforeMount() {
     firebase.auth().onAuthStateChanged((user) => {
       this.loggedIn = user !== null;
+      this.$store.commit('setUser', user);
     });
   },
 }
