@@ -45,7 +45,7 @@
 import axios from "axios";
 
 export default {
-  data: () => {
+  data() {
     return {
       exercises: [],
       log: [],
@@ -57,7 +57,17 @@ export default {
     };
   },
   mounted() {
-    axios.get('http://localhost:8000/').then((response) => {
+    axios
+      .get("http://localhost:8000/log", {
+        params: {
+          uid: this.$store.state.user.uid,
+          date: new Date().toLocaleDateString(),
+        },
+      })
+      .then((response) => {
+        this.log = response.data;
+      });
+    axios.get("http://localhost:8000/exercises").then((response) => {
       this.exercises = response.data;
     });
   },

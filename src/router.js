@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router';
 
 import About from './components/About.vue';
-import Exercises from './components/Exercises/Exercises.vue';
+import Log from './components/Workouts/Log.vue';
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
 
@@ -16,7 +16,7 @@ const routes = [
     { name: 'register', path: '/register', component: Register },
     { name: 'about', path: '/about', component: About },
     {
-        name: 'exercises', path: '/exercises', component: Exercises, meta: {
+        name: 'exercises', path: '/exercises', component: Log, meta: {
             requiresAuth: true
         }
     }

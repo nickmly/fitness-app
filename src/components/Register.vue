@@ -21,8 +21,7 @@ export default {
   methods: {
     async onFormSubmit() {
       try {
-        const user = await auth.register(this.email, this.password);
-        console.log(user);
+        await auth.register(this.email, this.password);
         this.$router.replace({ name: "exercises" });
       } catch (err) {
         console.log(err);
