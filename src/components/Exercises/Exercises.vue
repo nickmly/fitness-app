@@ -20,7 +20,11 @@
               v-model.number="addingSetWeight"
               placeholder="Weight"
             />
-            <input type="number" v-model.number="addingSetReps" placeholder="Reps" />
+            <input
+              type="number"
+              v-model.number="addingSetReps"
+              placeholder="Reps"
+            />
             <button type="submit">Done</button>
           </form>
         </div>
@@ -38,12 +42,12 @@
   </div>
 </template>
 <script>
-import exercises from "../../data/exercises";
+import axios from "axios";
 
 export default {
   data: () => {
     return {
-      exercises,
+      exercises: [],
       log: [],
       addingExercise: false,
       addingSet: null,
@@ -51,6 +55,11 @@ export default {
       addingSetReps: null,
       currentId: 0,
     };
+  },
+  mounted() {
+    axios.get('http://localhost:8000/').then((response) => {
+      this.exercises = response.data;
+    });
   },
   methods: {
     showExerciseList() {
@@ -60,7 +69,7 @@ export default {
       this.addingSet = id;
     },
     addExercise(id) {
-      const exercise = exercises.find((e) => e.id === id);
+      const exercise = this.exercises.find((e) => e.id === id);
       this.log.push({
         id: this.currentId,
         title: exercise.title,
