@@ -42,12 +42,12 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import { HTTP } from "../../axios";
 
 export default {
   data() {
     return {
-      exercises: [],
+      exercises: this.$store.state.exercises,
       log: [],
       addingExercise: false,
       addingSet: null,
@@ -57,30 +57,25 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get("http://localhost:8000/log", {
-        params: {
-          uid: this.$store.state.user.uid,
-          date: new Date().toLocaleDateString(),
-        },
-      })
-      .then((response) => {
-        this.log = response.data;
-      });
-    axios.get("http://localhost:8000/exercises").then((response) => {
-      this.exercises = response.data;
+    HTTP.get("/log", {
+      params: {
+        uid: this.$store.state.user.uid,
+        date: new Date().toLocaleDateString(),
+      },
+    }).then((response) => {
+      this.log = response.data;
     });
   },
   methods: {
     showExerciseList() {
       if (this.log.length === 0) {
         // if there is no log for today then add one
-        axios
-          .post("http://localhost:8000/log", {
+        HTTP
+          .post("/log", {
             uid: this.$store.state.user.uid,
             date: new Date().toLocaleDateString(),
           })
-          .then((_) => {
+          .then(() => {
             this.addingExercise = true;
           });
       } else {
