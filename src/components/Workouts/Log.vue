@@ -2,7 +2,7 @@
   <div class="workout-log">
     <input class="date-picker" type="date" v-model="currentDate">
     <ul class="workout-log__list" v-if="!addingExercise">
-      <button @click="showExerciseList">Add Exercise</button>
+      <button v-if="currentDate" @click="showExerciseList">Add Exercise</button>
       <li v-for="exercise in workouts" :key="exercise.id">
         <app-workout-exercise
           :exercise="exercise"
@@ -10,26 +10,25 @@
         />
       </li>
     </ul>
-    <ul v-else>
-      <button
+    <div v-else>
+      <button        
         v-for="exercise in exercises"
         :key="exercise.id"
         @click="addExercise(exercise.id)"
       >
         {{ exercise.title }}
       </button>
-    </ul>
+    </div>
   </div>
 </template>
 <script>
 import WorkoutExercise from "./WorkoutExercise";
-// import Datepicker from "vuejs-datepicker";
 import { HTTP } from "../../axios";
 
 export default {
   components: {
     appWorkoutExercise: WorkoutExercise,
-    // appDatePicker: Datepicker,
+
   },
   data() {
     return {
