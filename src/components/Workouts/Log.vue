@@ -4,7 +4,6 @@
     <app-date-picker
       v-model="currentDate"
       wrapper-class="date-picker"
-      format="yyyy-MM-dd"
     />
     <ul v-if="!addingExercise">
       <button @click="showExerciseList">Add</button>
