@@ -42,9 +42,6 @@ export default {
       log: {},
       workouts: [],
       addingExercise: false,
-      addingSet: null,
-      addingSetWeight: null,
-      addingSetReps: null,
       currentDate: new Date(),
     };
   },
