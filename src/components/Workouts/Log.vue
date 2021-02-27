@@ -9,23 +9,10 @@
     <ul v-if="!addingExercise">
       <button @click="showExerciseList">Add</button>
       <li v-for="exercise in workouts" :key="exercise.id">
-        <div class="exercise">
-          <div>
-            <h4>{{ exercise.title }}</h4>
-            <button @click="showSetForm(exercise.workout_id)">+</button>
-          </div>
-          <ul v-if="addingSet !== exercise.workout_id" class="set-list">
-            <li v-for="(set, index) in exercise.sets" :key="index">
-              {{ set.weight }}lbs / {{ set.reps }} reps
-            </li>
-          </ul>
-          <app-workout-set
-            v-else
-            @addSet="addSet(exercise.workout_id)"
-            @addWeight="addingSetWeight = $event"
-            @addReps="addingSetReps = $event"
-          />
-        </div>
+        <app-workout-exercise
+          :exercise="exercise"
+          @addSetToWorkout="addSetToWorkout"
+        />
       </li>
     </ul>
     <ul v-else>
@@ -40,13 +27,13 @@
   </div>
 </template>
 <script>
-import WorkoutSet from "./WorkoutSet";
+import WorkoutExercise from "./WorkoutExercise";
 import Datepicker from "vuejs-datepicker";
 import { HTTP } from "../../axios";
 
 export default {
   components: {
-    appWorkoutSet: WorkoutSet,
+    appWorkoutExercise: WorkoutExercise,
     appDatePicker: Datepicker,
   },
   data() {
@@ -80,9 +67,6 @@ export default {
       this.log = {};
       this.workouts = [];
       this.addingExercise = false;
-      this.addingSet = null;
-      this.addingSetWeight = null;
-      this.addingSetReps = null;
     },
     async populateLog() {
       // Get the log for today
@@ -138,9 +122,6 @@ export default {
         this.addingExercise = true;
       }
     },
-    showSetForm(id) {
-      this.addingSet = id;
-    },
     addExercise(id) {
       const exercise = this.$store.state.exercises.find((e) => e.id === id);
       // Add a workout to the DB with the exercise id
@@ -157,20 +138,21 @@ export default {
         this.addingExercise = false;
       });
     },
-    addSet(id) {
+    addSetToWorkout(set) {
       // Add a set to the DB with the workout id
       HTTP.post("/set", {
-        workout_id: id,
-        weight: this.addingSetWeight,
-        reps: this.addingSetReps,
+        workout_id: set.workout_id,
+        weight: set.weight,
+        reps: set.reps,
       }).then((response) => {
-        const workout = this.workouts.find((w) => w.workout_id === id);
+        const workout = this.workouts.find(
+          (w) => w.workout_id === set.workout_id
+        );
         workout.sets.push({
           id: response.data,
-          weight: this.addingSetWeight,
-          reps: this.addingSetReps,
+          weight: set.weight,
+          reps: set.reps,
         });
-        this.addingSet = false;
       });
     },
   },
@@ -180,17 +162,6 @@ export default {
 ul {
   list-style: none;
   padding: 0;
-}
-.exercise {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.exercise h4 {
-  display: inline-block;
-}
-.set-list {
-  display: inline-block;
 }
 .date-picker {
   display: flex;
