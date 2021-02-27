@@ -1,12 +1,8 @@
 <template>
-  <div>
-    <h2>Workout log</h2>
-    <app-date-picker
-      v-model="currentDate"
-      wrapper-class="date-picker"
-    />
-    <ul v-if="!addingExercise">
-      <button @click="showExerciseList">Add</button>
+  <div class="workout-log">
+    <input class="date-picker" type="date" v-model="currentDate">
+    <ul class="workout-log__list" v-if="!addingExercise">
+      <button @click="showExerciseList">Add Exercise</button>
       <li v-for="exercise in workouts" :key="exercise.id">
         <app-workout-exercise
           :exercise="exercise"
@@ -27,13 +23,13 @@
 </template>
 <script>
 import WorkoutExercise from "./WorkoutExercise";
-import Datepicker from "vuejs-datepicker";
+// import Datepicker from "vuejs-datepicker";
 import { HTTP } from "../../axios";
 
 export default {
   components: {
     appWorkoutExercise: WorkoutExercise,
-    appDatePicker: Datepicker,
+    // appDatePicker: Datepicker,
   },
   data() {
     return {
@@ -41,16 +37,11 @@ export default {
       log: {},
       workouts: [],
       addingExercise: false,
-      currentDate: new Date(),
+      currentDate: new Date().toLocaleDateString(),
     };
   },
   async mounted() {
     await this.populateLog();
-  },
-  computed: {
-    formattedDate() {
-      return this.currentDate.toLocaleDateString();
-    },
   },
   watch: {
     currentDate: function () {
@@ -69,7 +60,7 @@ export default {
       const logResponse = await HTTP.get("/log", {
         params: {
           uid: this.$store.state.user.uid,
-          date: this.formattedDate,
+          date: this.currentDate,
         },
       });
       this.log = logResponse.data.length === 0 ? null : logResponse.data[0];
@@ -105,12 +96,12 @@ export default {
         // if there is no log for today then add one
         HTTP.post("/log", {
           uid: this.$store.state.user.uid,
-          date: this.formattedDate,
+          date: this.currentDate,
         }).then((response) => {
           this.log = {
             id: response.data,
             user_id: this.$store.state.user.uid,
-            date: this.formattedDate,
+            date: this.currentDate,
           };
           this.addingExercise = true;
         });
@@ -155,12 +146,26 @@ export default {
 };
 </script>
 <style scoped>
-ul {
-  list-style: none;
-  padding: 0;
-}
 .date-picker {
+  border: none;
+  align-self: flex-end;
+  font-size: 24px;
+}
+.workout-log {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  background: #303844;
+}
+.workout-log__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.workout-log__list > li {
+  display: flex;
+  width: 100%;
+  margin: 8px;
 }
 </style>

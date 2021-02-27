@@ -1,9 +1,9 @@
 <template>
   <div class="exercise">
-    <div>
+    <header>
       <h4>{{ exercise.title }}</h4>
       <button @click="showSetForm(exercise.workout_id)">+</button>
-    </div>
+    </header>
     <ul v-if="addingSetId !== exercise.workout_id" class="set-list">
       <li v-for="(set, index) in exercise.sets" :key="index">
         {{ set.weight }}lbs / {{ set.reps }} reps
@@ -53,9 +53,12 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
+  text-align: left;
 }
 .exercise h4 {
   display: inline-block;
+  font-size: 24px;
 }
 .set-list {
   display: inline-block;

@@ -23,12 +23,62 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
+* {
+  box-sizing: border-box;
+}
+body {
+  background: #222831;
+}
+a {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+input {
+  font-family: 'Source Sans Pro';
+  background: #ececec;
+  padding: 10px;
+  border: 2px solid #1d3557;
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 8px;
+}
+input:active,
+input:focus {
+  border: 2px solid #457b9d;
+  outline: none;
+}
+button {
+  background: #1d3557;
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 8px;
+}
+button:active, button:focus {
+  background: #1d3557;
+  border: 2px solid #457b9d;
+  padding: 8px;
+}
+button:hover {
+  background: #457b9d;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #ffffff;
   margin-top: 60px;
 }
 </style>
