@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>Login</h2>
+    <p v-if="error !== ''">{{ error }}</p>
     <form @submit.prevent="onFormSubmit">
       <input type="email" v-model="email" placeholder="Email" />
       <input type="password" v-model="password" placeholder="Password" />
@@ -24,7 +25,7 @@ export default {
         await auth.login(this.email, this.password);
         this.$router.replace({name: 'exercises'});
       } catch (err) {
-        console.log(err);
+        this.error = err.message;
       }
     },
   },
