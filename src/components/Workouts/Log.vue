@@ -19,19 +19,12 @@
               {{ set.weight }}lbs / {{ set.reps }} reps
             </li>
           </ul>
-          <form v-else @submit.prevent="addSet(exercise.workout_id)">
-            <input
-              type="number"
-              v-model.number="addingSetWeight"
-              placeholder="Weight"
-            />
-            <input
-              type="number"
-              v-model.number="addingSetReps"
-              placeholder="Reps"
-            />
-            <button type="submit">Done</button>
-          </form>
+          <app-workout-set
+            v-else
+            @addSet="addSet(exercise.workout_id)"
+            @addWeight="addingSetWeight = $event"
+            @addReps="addingSetReps = $event"
+          />
         </div>
       </li>
     </ul>
@@ -47,11 +40,13 @@
   </div>
 </template>
 <script>
+import WorkoutSet from "./WorkoutSet";
 import Datepicker from "vuejs-datepicker";
 import { HTTP } from "../../axios";
 
 export default {
   components: {
+    appWorkoutSet: WorkoutSet,
     appDatePicker: Datepicker,
   },
   data() {
@@ -75,10 +70,10 @@ export default {
     },
   },
   watch: {
-    currentDate: function() {
+    currentDate: function () {
       this.resetLog();
       this.populateLog();
-    }
+    },
   },
   methods: {
     resetLog() {
