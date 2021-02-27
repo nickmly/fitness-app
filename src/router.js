@@ -11,9 +11,18 @@ import "firebase/auth";
 
 Vue.use(VueRouter);
 
+const redirectIfLoggedIn = (to, from, next) => {
+    const isLoggedIn = firebase.auth().currentUser;
+    if (isLoggedIn) {
+        next('/exercises');
+    } else {
+        next();
+    }
+}
+
 const routes = [
-    { name: 'login', path: '/login', component: Login },
-    { name: 'register', path: '/register', component: Register },
+    { name: 'login', path: '/login', component: Login, beforeEnter: redirectIfLoggedIn },
+    { name: 'register', path: '/register', component: Register, beforeEnter: redirectIfLoggedIn },
     { name: 'about', path: '/about', component: About },
     {
         name: 'exercises', path: '/exercises', component: Log, meta: {
@@ -22,15 +31,15 @@ const routes = [
     }
 ];
 
-const router = new VueRouter({mode: 'history', base: process.env.BASE_URL, routes});
+const router = new VueRouter({ mode: 'history', base: process.env.BASE_URL, routes });
 router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-  const isLoggedIn = firebase.auth().currentUser;
-  if (requiresAuth && !isLoggedIn) {
-      next('/login');
-  } else {
-      next();
-  }
+    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+    const isLoggedIn = firebase.auth().currentUser;
+    if (requiresAuth && !isLoggedIn) {
+        next('/login');
+    } else {
+        next();
+    }
 });
 
 export default router;
