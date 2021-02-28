@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import auth from '../auth';
+import auth from "../auth";
 export default {
   data() {
     return {
@@ -23,7 +23,7 @@ export default {
     async onFormSubmit() {
       try {
         await auth.login(this.email, this.password);
-        this.$router.replace({name: 'exercises'});
+        this.$router.replace({ name: "log" });
       } catch (err) {
         this.error = err.message;
       }

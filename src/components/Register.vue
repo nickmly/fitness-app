@@ -23,7 +23,7 @@ export default {
     async onFormSubmit() {
       try {
         await auth.register(this.email, this.password);
-        this.$router.replace({ name: "exercises" });
+        this.$router.replace({ name: "log" });
       } catch (err) {
          this.error = err.message;
       }
