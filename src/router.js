@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router';
 
 import About from './components/About.vue';
-import Log from './components/Workouts/Log.vue';
+import WorkoutLog from './components/Workouts/WorkoutLog.vue';
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
 
@@ -14,7 +14,7 @@ Vue.use(VueRouter);
 const redirectIfLoggedIn = (to, from, next) => {
     const isLoggedIn = firebase.auth().currentUser;
     if (isLoggedIn) {
-        next('/exercises');
+        next('/log');
     } else {
         next();
     }
@@ -25,7 +25,7 @@ const routes = [
     { name: 'register', path: '/register', component: Register, beforeEnter: redirectIfLoggedIn },
     { name: 'about', path: '/about', component: About },
     {
-        name: 'exercises', path: '/exercises', component: Log, meta: {
+        name: 'log', path: '/log', component: WorkoutLog, meta: {
             requiresAuth: true
         }
     }

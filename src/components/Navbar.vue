@@ -1,7 +1,7 @@
 <template>
   <nav>
     <router-link to="/about">About</router-link>
-    <router-link to="/exercises">Exercises</router-link>
+    <router-link to="/log">Log</router-link>
     <router-link v-if="!loggedIn" to="/login">Login</router-link>
     <router-link v-if="!loggedIn" to="/register">Register</router-link>
     <div v-if="loggedIn">
