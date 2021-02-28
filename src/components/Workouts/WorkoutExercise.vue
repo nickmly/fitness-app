@@ -59,6 +59,7 @@ export default {
 .exercise h4 {
   display: inline-block;
   font-size: 24px;
+  max-width: 256px;
 }
 .set-list {
   display: inline-block;

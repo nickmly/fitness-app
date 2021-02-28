@@ -3,8 +3,8 @@ import VueRouter from 'vue-router';
 
 import About from './components/About.vue';
 import WorkoutLog from './components/Workouts/WorkoutLog.vue';
-import Login from './components/Login.vue';
-import Register from './components/Register.vue';
+import Login from './components/LoginForm/Login.vue';
+import Register from './components/LoginForm/Register.vue';
 
 import firebase from "firebase/app";
 import "firebase/auth";

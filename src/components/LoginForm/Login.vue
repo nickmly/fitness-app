@@ -1,17 +1,19 @@
 <template>
-  <div>
-    <h2>Login</h2>
-    <p v-if="error !== ''">{{ error }}</p>
-    <form @submit.prevent="onFormSubmit">
-      <input type="email" v-model="email" placeholder="Email" />
-      <input type="password" v-model="password" placeholder="Password" />
-      <button type="submit">Login</button>
-    </form>
-  </div>
+  <app-login-form 
+    title="Login" 
+    :error="error"
+    @onFormSubmit="onFormSubmit" 
+    @changeEmail="email = $event"
+    @changePassword="password = $event"
+  />
 </template>
 <script>
-import auth from "../auth";
+import LoginForm from "./LoginForm";
+import auth from "../../auth";
 export default {
+  components: {
+    appLoginForm: LoginForm,
+  },
   data() {
     return {
       email: "",
