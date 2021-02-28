@@ -3,6 +3,7 @@
     <header>
       <h4>{{ exercise.title }}</h4>
       <button @click="showSetForm(exercise.workout_id)">+</button>
+      <button @click="deleteExercise(exercise.workout_id)">X</button>
     </header>
     <ul v-if="addingSetId !== exercise.workout_id" class="set-list">
       <li v-for="(set, index) in exercise.sets" :key="index">
@@ -38,6 +39,9 @@ export default {
     showSetForm(id) {
       this.addingSetId = id;
     },
+    deleteExercise(id) {
+      this.$emit("deleteExercise", id);
+    },
     addSet(id) {
       this.$emit("addSetToWorkout", {
         workout_id: id,
@@ -49,7 +53,7 @@ export default {
     deleteSet(id, workout_id) {
       this.$emit("deleteSetFromWorkout", {
         id,
-        workout_id
+        workout_id,
       });
     },
   },

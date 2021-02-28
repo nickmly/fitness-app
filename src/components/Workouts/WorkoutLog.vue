@@ -6,6 +6,7 @@
       <li v-for="exercise in workouts" :key="exercise.id">
         <app-workout-exercise
           :exercise="exercise"
+          @deleteExercise="deleteExercise"
           @addSetToWorkout="addSetToWorkout"
           @deleteSetFromWorkout="deleteSetFromWorkout"
         />
@@ -127,6 +128,20 @@ export default {
         this.addingExercise = false;
       });
     },
+    deleteExercise(id) {
+      HTTP.delete("/workout", {
+        params: {
+          workout_id: id,
+        },
+      }).then(() => {
+        this.workouts = this.workouts.filter((w) => w.workout_id !== id);
+      });
+      HTTP.delete("/sets", {
+        params: {
+          workout_id: id,
+        },
+      });
+    },
     addSetToWorkout(set) {
       // Add a set to the DB with the workout id
       HTTP.post("/set", {
@@ -148,14 +163,14 @@ export default {
       HTTP.delete("/set", {
         params: {
           id: set.id,
-        }
+        },
       }).then(() => {
         const workout = this.workouts.find(
           (w) => w.workout_id === set.workout_id
         );
         workout.sets = workout.sets.filter((s) => s.id !== set.id);
       });
-    }
+    },
   },
 };
 </script>
