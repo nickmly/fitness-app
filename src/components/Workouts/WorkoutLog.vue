@@ -10,7 +10,8 @@
         />
       </li>
     </ul>
-    <div v-else>
+    <div class="workout-log__exercises" v-else>
+      <button class="close-btn" @click="addingExercise = false">Close</button>
       <app-exercise-list :exercises="exercises" @addExercise="addExercise" />
     </div>
   </div>
@@ -145,12 +146,14 @@ export default {
   align-self: flex-end;
   font-size: 24px;
 }
+
 .workout-log {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   background: #303844;
 }
+
 .workout-log__list {
   display: flex;
   flex-direction: column;
@@ -161,5 +164,13 @@ export default {
   display: flex;
   width: 100%;
   margin: 8px;
+}
+.workout-log__exercises {
+  display: flex;
+  flex-direction: column;
+}
+
+.close-btn {
+  align-self: flex-start;
 }
 </style>
