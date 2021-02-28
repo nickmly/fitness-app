@@ -7,17 +7,11 @@
 
 <script>
 import Navbar from "./components/Navbar.vue";
-import { HTTP } from "./axios";
 
 export default {
   name: "App",
   components: {
     appNavbar: Navbar,
-  },
-  mounted() {
-    HTTP.get("/exercises").then((response) => {
-      this.$store.commit("setExercises", response.data);
-    });
   },
 };
 </script>

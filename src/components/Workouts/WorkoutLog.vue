@@ -28,12 +28,18 @@ export default {
   },
   data() {
     return {
-      exercises: this.$store.state.exercises,
+      exercises: [],
       log: {},
       workouts: [],
       addingExercise: false,
       currentDate: new Date().toLocaleDateString(),
     };
+  },
+  beforeMount() {
+    HTTP.get("/exercises").then((response) => {
+      this.$store.commit("setExercises", response.data);
+      this.exercises = response.data;
+    });
   },
   async mounted() {
     await this.populateLog();

@@ -24,7 +24,7 @@ firebase.initializeApp(firebaseConfig);
 // Ensure auth state changed fires before app is mounted
 let app;
 firebase.auth().onAuthStateChanged(user => {
-  console.log(user);
+  store.commit('setUser', user);
   if (!app) {
     app = new Vue({
       render: h => h(App),
