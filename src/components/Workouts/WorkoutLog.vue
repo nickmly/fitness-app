@@ -7,6 +7,7 @@
         <app-workout-exercise
           :exercise="exercise"
           @addSetToWorkout="addSetToWorkout"
+          @deleteSetFromWorkout="deleteSetFromWorkout"
         />
       </li>
     </ul>
@@ -57,7 +58,7 @@ export default {
       this.addingExercise = false;
     },
     async populateLog() {
-      // Get the log for today
+      // Get the log for the current date
       const logResponse = await HTTP.get("/log", {
         params: {
           uid: this.$store.state.user.uid,
@@ -65,7 +66,7 @@ export default {
         },
       });
       this.log = logResponse.data.length === 0 ? null : logResponse.data[0];
-      // If we have no log today, exit; No need to get the workouts from a non-existing log
+      // If we have no log exit; No need to get the workouts from a non-existing log
       if (logResponse.data.length === 0) return;
       // Get the workouts from this log
       const workoutsResponse = await HTTP.get("/workout", {
@@ -143,6 +144,18 @@ export default {
         });
       });
     },
+    deleteSetFromWorkout(set) {
+      HTTP.delete("/set", {
+        params: {
+          id: set.id,
+        }
+      }).then(() => {
+        const workout = this.workouts.find(
+          (w) => w.workout_id === set.workout_id
+        );
+        workout.sets = workout.sets.filter((s) => s.id !== set.id);
+      });
+    }
   },
 };
 </script>

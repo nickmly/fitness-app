@@ -6,7 +6,8 @@
     </header>
     <ul v-if="addingSetId !== exercise.workout_id" class="set-list">
       <li v-for="(set, index) in exercise.sets" :key="index">
-        {{ set.weight }}lbs / {{ set.reps }} reps
+        <span>{{ set.weight }}lbs / {{ set.reps }} reps</span>
+        <button @click="deleteSet(set.id, exercise.workout_id)">X</button>
       </li>
     </ul>
     <app-workout-set
@@ -21,13 +22,13 @@
 import WorkoutSet from "./WorkoutSet";
 export default {
   components: {
-    appWorkoutSet: WorkoutSet
+    appWorkoutSet: WorkoutSet,
   },
   data() {
     return {
       addingSetId: null,
       addingSetWeight: null,
-      addingSetReps: null
+      addingSetReps: null,
     };
   },
   props: {
@@ -38,12 +39,18 @@ export default {
       this.addingSetId = id;
     },
     addSet(id) {
-      this.$emit('addSetToWorkout', {
+      this.$emit("addSetToWorkout", {
         workout_id: id,
         weight: this.addingSetWeight,
-        reps: this.addingSetReps
+        reps: this.addingSetReps,
       });
       this.addingSetId = null;
+    },
+    deleteSet(id, workout_id) {
+      this.$emit("deleteSetFromWorkout", {
+        id,
+        workout_id
+      });
     },
   },
 };
