@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
 
-import About from './components/About.vue';
+import Home from './components/Home.vue';
 import WorkoutLog from './components/Workouts/WorkoutLog.vue';
 import Login from './components/LoginForm/Login.vue';
 import Register from './components/LoginForm/Register.vue';
@@ -23,7 +23,7 @@ const redirectIfLoggedIn = (to, from, next) => {
 const routes = [
     { name: 'login', path: '/login', component: Login, beforeEnter: redirectIfLoggedIn },
     { name: 'register', path: '/register', component: Register, beforeEnter: redirectIfLoggedIn },
-    { name: 'about', path: '/about', component: About },
+    { name: 'home', path: '/', component: Home },
     {
         name: 'log', path: '/log', component: WorkoutLog, meta: {
             requiresAuth: true

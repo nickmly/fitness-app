@@ -189,7 +189,7 @@ export default {
 .workout-log {
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 20px;
   background: $dark-grey;
 }
 

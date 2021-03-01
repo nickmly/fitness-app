@@ -1,6 +1,6 @@
 <template>
   <app-login-form 
-    title="Login" 
+    title="Register" 
     :error="error"
     @onFormSubmit="onFormSubmit" 
     @changeEmail="email = $event"

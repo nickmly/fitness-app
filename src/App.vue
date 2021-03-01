@@ -23,6 +23,7 @@ export default {
 }
 body {
   background: $black;
+  margin: 0;
 }
 a {
   color: $white;
@@ -73,6 +74,5 @@ button:hover {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: $white;
-  margin-top: 60px;
 }
 </style>
