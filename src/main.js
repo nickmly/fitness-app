@@ -5,6 +5,7 @@ import store from './store';
 import router from './router';
 import axios from 'axios';
 import firebase from 'firebase/app';
+import './icons';
 
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false

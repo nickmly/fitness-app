@@ -3,14 +3,24 @@
     <header class="exercise-header">
       <h4>{{ exercise.title }}</h4>
       <div class="exercise-buttons">
-        <button @click="showSetForm(exercise.workout_id)">+</button>
-        <button @click="deleteExercise(exercise.workout_id)">X</button>
+        <button @click="showSetForm(exercise.workout_id)">
+          <font-awesome-icon icon="plus" />
+        </button>
+        <button @click="deleteExercise(exercise.workout_id)">
+          <font-awesome-icon icon="times" />
+        </button>
       </div>
     </header>
     <ul v-if="addingSetId !== exercise.workout_id" class="set-list">
-      <li class="exercise-set" v-for="(set, index) in exercise.sets" :key="index">
+      <li
+        class="exercise-set"
+        v-for="(set, index) in exercise.sets"
+        :key="index"
+      >
         <span>{{ set.weight }}lbs / {{ set.reps }} reps</span>
-        <button @click="deleteSet(set.id, exercise.workout_id)">X</button>
+        <button @click="deleteSet(set.id, exercise.workout_id)">
+          <font-awesome-icon icon="times" />
+        </button>
       </li>
     </ul>
     <app-workout-set

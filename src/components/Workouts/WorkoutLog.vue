@@ -13,7 +13,12 @@
       </li>
     </ul>
     <div class="workout-log__exercises" v-else>
-      <button class="close-btn" @click="addingExercise = false">Close</button>
+      <button class="close-btn" @click="addingExercise = false">
+        <font-awesome-icon icon="times-circle" />
+        <span> 
+          Close
+        </span>
+      </button>
       <app-exercise-list :exercises="exercises" @addExercise="addExercise" />
     </div>
   </div>
@@ -203,6 +208,7 @@ export default {
 .workout-log__exercises {
   display: flex;
   flex-direction: column;
+  margin: 8px;
 }
 
 .close-btn {

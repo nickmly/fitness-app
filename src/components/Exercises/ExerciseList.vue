@@ -11,7 +11,12 @@
       </button>
     </div>
     <div v-else class="exercise-list__list">
-      <button class="back-btn" v-if="currentMuscle" @click="goBack">Go Back</button>
+      <button class="back-btn" v-if="currentMuscle" @click="goBack">
+        <font-awesome-icon icon="arrow-alt-circle-left" />
+        <span>
+          Go Back
+        </span>
+      </button>
       <button
         v-for="exercise in exercisesFiltered"
         :key="exercise.id"
