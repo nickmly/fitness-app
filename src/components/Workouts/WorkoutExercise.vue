@@ -83,9 +83,20 @@ export default {
 
 .exercise-header {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin: 10px 0;
   border-bottom: 2px solid $white;
+}
+
+@media screen and (min-width: $medium-screen) {
+  .exercise-header {
+    flex-direction: row;
+  }
+}
+
+.exercise-buttons {
+  align-self: flex-end;
 }
 
 .exercise h4 {
