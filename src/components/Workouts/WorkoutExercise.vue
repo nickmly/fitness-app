@@ -80,23 +80,34 @@ export default {
   text-align: left;
   margin: 8px;
 }
+
 .exercise-header {
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
   border-bottom: 2px solid $white;
 }
+
 .exercise h4 {
   display: inline-block;
   font-size: 24px;
   max-width: 256px;
   margin: 0;
 }
+
 .set-list {
   display: inline-block;
 }
+
 .exercise-set {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  padding: 8px;
+}
+
+.exercise-set:nth-of-type(even) {
+  background: $medium-grey;
 }
 </style>
