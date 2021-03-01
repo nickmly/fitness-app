@@ -174,7 +174,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .date-picker {
   border: none;
   align-self: flex-end;
@@ -185,13 +185,14 @@ export default {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  background: #303844;
+  background: $dark-grey;
 }
 
 .workout-log__list {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin: 8px;
 }
 
 .workout-log__list > li {

@@ -16,16 +16,16 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
 * {
   box-sizing: border-box;
 }
 body {
-  background: #222831;
+  background: $black;
 }
 a {
-  color: #ffffff;
+  color: $white;
   font-weight: bold;
   text-decoration: none;
 }
@@ -38,21 +38,21 @@ ul {
 }
 input {
   font-family: 'Source Sans Pro';
-  background: #ececec;
+  background: $light-grey;
   padding: 10px;
-  border: 2px solid #1d3557;
+  border: 2px solid $dark-blue;
   border-radius: 4px;
   font-size: 14px;
   margin: 8px;
 }
 input:active,
 input:focus {
-  border: 2px solid #457b9d;
+  border: 2px solid $light-blue;
   outline: none;
 }
 button {
-  background: #1d3557;
-  color: #ffffff;
+  background: $dark-blue;
+  color: $white;
   border: none;
   font-size: 14px;
   border-radius: 4px;
@@ -60,19 +60,19 @@ button {
   margin: 8px;
 }
 button:active, button:focus {
-  background: #1d3557;
-  border: 2px solid #457b9d;
+  background: $dark-blue;
+  border: 2px solid $light-blue;
   padding: 8px;
 }
 button:hover {
-  background: #457b9d;
+  background: $light-blue;
 }
 #app {
   font-family: 'Source Sans Pro', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #ffffff;
+  color: $white;
   margin-top: 60px;
 }
 </style>
