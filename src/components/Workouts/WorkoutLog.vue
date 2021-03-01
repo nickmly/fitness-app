@@ -189,8 +189,14 @@ export default {
 .workout-log {
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin: 0;
   background: $dark-grey;
+}
+
+@media screen and (min-width: $medium-screen) {
+  .workout-log {
+    margin: 20px;
+  }
 }
 
 .workout-log__list {
