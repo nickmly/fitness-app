@@ -37,7 +37,7 @@ ul {
   list-style: none;
   padding: 0;
 }
-input {
+input, select {
   font-family: 'Source Sans Pro';
   background: $light-grey;
   padding: 10px;
@@ -47,7 +47,9 @@ input {
   margin: 8px;
 }
 input:active,
-input:focus {
+input:focus,
+select:active,
+select:focus {
   border: 2px solid $light-blue;
   outline: none;
 }

@@ -35,7 +35,6 @@ export default {
   },
   data() {
     return {
-      exercises: [],
       log: {},
       workouts: [],
       addingExercise: false,
@@ -45,7 +44,7 @@ export default {
   beforeMount() {
     HTTP.get("/exercises").then((response) => {
       this.$store.commit("setExercises", response.data);
-      this.exercises = response.data;
+      this.$store.commit("setMuscles", new Set(this.exercises.map((e) => e.muscles)));
     });
   },
   async mounted() {
@@ -56,6 +55,11 @@ export default {
       this.resetLog();
       this.populateLog();
     },
+  },
+  computed: {
+    exercises() {
+      return this.$store.state.exercises;
+    }
   },
   methods: {
     resetLog() {

@@ -1,46 +1,62 @@
 <template>
   <div class="exercise-list">
-    <input v-if="!currentMuscle" type="text" placeholder="Search" v-model="searchExercise" />
-    <div v-if="!currentMuscle && !searchExercise" class="exercise-list__list">
+    <template v-if="!creatingExercise">
       <button
-        v-for="muscle in muscles"
-        :key="muscle"
-        @click="currentMuscle = muscle"
+        v-if="!currentMuscle && !searchExercise"
+        @click="creatingExercise = true"
       >
-        {{ muscle }}
+        Create Exercise
       </button>
-    </div>
-    <div v-else class="exercise-list__list">
-      <button class="back-btn" v-if="currentMuscle" @click="goBack">
-        <font-awesome-icon icon="arrow-alt-circle-left" />
-        <span>
-          Go Back
-        </span>
-      </button>
-      <button
-        v-for="exercise in exercisesFiltered"
-        :key="exercise.id"
-        @click="$emit('addExercise', exercise.id)"
-      >
-        {{ exercise.title }}
-      </button>
-    </div>
+      <input
+        v-if="!currentMuscle"
+        type="text"
+        placeholder="Search"
+        v-model="searchExercise"
+      />
+      <div v-if="!currentMuscle && !searchExercise" class="exercise-list__list">
+        <button
+          v-for="muscle in muscles"
+          :key="muscle"
+          @click="currentMuscle = muscle"
+        >
+          {{ muscle }}
+        </button>
+      </div>
+      <div v-else class="exercise-list__list">
+        <button class="back-btn" v-if="currentMuscle" @click="goBack">
+          <font-awesome-icon icon="arrow-alt-circle-left" />
+          <span> Go Back </span>
+        </button>
+        <button
+          v-for="exercise in exercisesFiltered"
+          :key="exercise.id"
+          @click="$emit('addExercise', exercise.id)"
+        >
+          {{ exercise.title }}
+        </button>
+      </div>
+    </template>
+    <template v-else>
+      <app-exercise-form @goBack="creatingExercise = false" />
+    </template>
   </div>
 </template>
 <script>
+import ExerciseForm from "./ExerciseForm";
 export default {
+  components: {
+    appExerciseForm: ExerciseForm,
+  },
   props: {
     exercises: Array,
   },
   data() {
     return {
-      muscles: [],
+      muscles: this.$store.state.muscles,
       currentMuscle: null,
       searchExercise: "",
+      creatingExercise: false,
     };
-  },
-  mounted() {
-    this.muscles = new Set(this.exercises.map((e) => e.muscles));
   },
   methods: {
     goBack() {
@@ -50,7 +66,11 @@ export default {
   },
   computed: {
     exercisesFiltered() {
-      return this.currentMuscle ? this.exercises.filter((e) => e.muscles === this.currentMuscle) : this.exercises.filter((e) => e.title.toLowerCase().includes(this.searchExercise.toLowerCase()));
+      return this.currentMuscle
+        ? this.exercises.filter((e) => e.muscles === this.currentMuscle)
+        : this.exercises.filter((e) =>
+            e.title.toLowerCase().includes(this.searchExercise.toLowerCase())
+          );
     },
   },
 };

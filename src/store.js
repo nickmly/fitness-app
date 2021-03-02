@@ -6,7 +6,8 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     user: null,
-    exercises: []
+    exercises: [],
+    muscles: []
   },
   mutations: {
     setUser(state, user) {
@@ -14,6 +15,9 @@ const store = new Vuex.Store({
     },
     setExercises(state, exercises) {
       state.exercises = exercises;
+    },
+    setMuscles(state, muscles) {
+      state.muscles = muscles;
     }
   }
 });
