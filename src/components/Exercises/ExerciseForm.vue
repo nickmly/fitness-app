@@ -6,8 +6,8 @@
     </button>
     <h2>Creating Custom Exercise</h2>
     <form @submit.prevent="createExercise">
-      <input type="text" placeholder="Name" v-model="title" />
-      <select v-model="muscles">
+      <input title="Name" type="text" placeholder="Name" v-model="title" />
+      <select title="Muscle Targeted" v-model="muscles">
         <option
           v-for="muscleOpt in muscleOptions"
           :key="muscleOpt"
@@ -16,7 +16,7 @@
           {{ muscleOpt }}
         </option>
       </select>
-      <input type="text" placeholder="Equipment Required" v-model="equipment" />
+      <input title="Equipment Required" type="text" placeholder="Equipment Required" v-model="equipment" />
       <button>Create</button>
     </form>
   </div>

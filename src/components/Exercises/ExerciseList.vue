@@ -8,6 +8,7 @@
         Create Exercise
       </button>
       <input
+        title="Search"
         v-if="!currentMuscle"
         type="text"
         placeholder="Search"
