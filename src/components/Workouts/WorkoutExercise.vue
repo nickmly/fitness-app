@@ -3,10 +3,10 @@
     <header class="exercise-header">
       <h4>{{ exercise.title }}</h4>
       <div class="exercise-buttons">
-        <button @click="showSetForm(exercise.workout_id)">
+        <button title="Add Set" @click="showSetForm(exercise.workout_id)">
           <font-awesome-icon icon="plus" />
         </button>
-        <button @click="deleteExercise(exercise.workout_id)">
+        <button title="Delete Exercise" @click="deleteExercise(exercise.workout_id)">
           <font-awesome-icon icon="times" />
         </button>
       </div>
@@ -18,7 +18,7 @@
         :key="index"
       >
         <span>{{ set.weight }}lbs / {{ set.reps }} reps</span>
-        <button @click="deleteSet(set.id, exercise.workout_id)">
+        <button title="Delete Set" @click="deleteSet(set.id, exercise.workout_id)">
           <font-awesome-icon icon="times" />
         </button>
       </li>
