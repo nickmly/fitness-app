@@ -194,9 +194,15 @@ export default {
   background: $dark-grey;
 }
 
-@media screen and (min-width: $medium-screen) {
+@media screen and (min-width: $large-screen) {
   .workout-log {
-    margin: 20px;
+    margin: 20px 80px;
+  }
+}
+
+@media screen and (min-width: $xl-screen) {
+  .workout-log {
+    margin: 20px 220px;
   }
 }
 
