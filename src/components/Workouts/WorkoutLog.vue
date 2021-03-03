@@ -1,6 +1,7 @@
 <template>
   <div class="workout-log">
     <input
+    title="Select a date to view logs"
       class="date-picker"
       type="date"
       v-model="currentDate"

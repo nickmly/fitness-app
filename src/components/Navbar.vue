@@ -1,7 +1,7 @@
 <template>
   <nav>
     <div>
-      <router-link to="/">
+      <router-link title="Home" to="/">
         <font-awesome-icon icon="dumbbell" />
       </router-link>
       <router-link v-if="loggedIn" to="/log">Log</router-link>
