@@ -7,7 +7,7 @@
       v-if="!addingExercise"
     />
     <template v-if="!loading">
-      <button v-if="currentDate" @click="showExerciseList">Add Exercise</button>
+      <button v-if="currentDate && !addingExercise" @click="showExerciseList">Add Exercise</button>
       <ul class="workout-log__list" v-if="!addingExercise">
         <li v-for="exercise in workouts" :key="exercise.id">
           <app-workout-exercise
