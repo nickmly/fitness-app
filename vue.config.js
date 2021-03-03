@@ -8,5 +8,13 @@ module.exports = {
         `
       }
     }
+  },
+  chainWebpack: config => {
+    config
+      .plugin('html')
+      .tap(args => {
+        args[0].title = "Demo Fitness Log App";
+        return args;
+      })
   }
 };
