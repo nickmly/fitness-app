@@ -1,6 +1,6 @@
 <template>
   <div class="workout-log">
-    <input class="date-picker" type="date" v-model="currentDate" />
+    <input class="date-picker" type="date" v-model="currentDate" v-if="!addingExercise" />
     <ul class="workout-log__list" v-if="!addingExercise">
       <button v-if="currentDate" @click="showExerciseList">Add Exercise</button>
       <li v-for="exercise in workouts" :key="exercise.id">
@@ -13,11 +13,8 @@
       </li>
     </ul>
     <div class="workout-log__exercises" v-else>
-      <button class="close-btn" @click="addingExercise = false">
+      <button class="close-btn" @click="addingExercise = false" title="Close">
         <font-awesome-icon icon="times-circle" />
-        <span> 
-          Close
-        </span>
       </button>
       <app-exercise-list :exercises="exercises" @addExercise="addExercise" />
     </div>
@@ -222,6 +219,6 @@ export default {
 }
 
 .close-btn {
-  align-self: flex-start;
+  align-self: flex-end;
 }
 </style>
