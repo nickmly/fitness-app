@@ -1,47 +1,63 @@
 <template>
   <div class="workout-log">
-    <input class="date-picker" type="date" v-model="currentDate" v-if="!addingExercise" />
-    <ul class="workout-log__list" v-if="!addingExercise">
+    <input
+      class="date-picker"
+      type="date"
+      v-model="currentDate"
+      v-if="!addingExercise"
+    />
+    <template v-if="!loading">
       <button v-if="currentDate" @click="showExerciseList">Add Exercise</button>
-      <li v-for="exercise in workouts" :key="exercise.id">
-        <app-workout-exercise
-          :exercise="exercise"
-          @deleteExercise="deleteExercise"
-          @addSetToWorkout="addSetToWorkout"
-          @deleteSetFromWorkout="deleteSetFromWorkout"
-        />
-      </li>
-    </ul>
-    <div class="workout-log__exercises" v-else>
-      <button class="close-btn" @click="addingExercise = false" title="Close">
-        <font-awesome-icon icon="times-circle" />
-      </button>
-      <app-exercise-list :exercises="exercises" @addExercise="addExercise" />
-    </div>
+      <ul class="workout-log__list" v-if="!addingExercise">
+        <li v-for="exercise in workouts" :key="exercise.id">
+          <app-workout-exercise
+            :exercise="exercise"
+            @deleteExercise="deleteExercise"
+            @addSetToWorkout="addSetToWorkout"
+            @deleteSetFromWorkout="deleteSetFromWorkout"
+          />
+        </li>
+      </ul>
+      <div class="workout-log__exercises" v-else>
+        <button class="close-btn" @click="addingExercise = false" title="Close">
+          <font-awesome-icon icon="times-circle" />
+        </button>
+        <app-exercise-list :exercises="exercises" @addExercise="addExercise" />
+      </div>
+    </template>
+    <template v-else>
+      <app-spinner />
+    </template>
   </div>
 </template>
 <script>
 import WorkoutExercise from "./WorkoutExercise";
 import ExerciseList from "../Exercises/ExerciseList";
+import Spinner from "../Spinner/Spinner";
 import { HTTP } from "../../axios";
 
 export default {
   components: {
+    appSpinner: Spinner,
     appWorkoutExercise: WorkoutExercise,
     appExerciseList: ExerciseList,
   },
   data() {
     return {
+      loading: true,
       log: {},
       workouts: [],
       addingExercise: false,
-      currentDate: new Date().toISOString().split('T')[0],
+      currentDate: new Date().toISOString().split("T")[0],
     };
   },
   beforeMount() {
     HTTP.get("/exercises").then((response) => {
       this.$store.commit("setExercises", response.data);
-      this.$store.commit("setMuscles", new Set(this.exercises.map((e) => e.muscles)));
+      this.$store.commit(
+        "setMuscles",
+        new Set(this.exercises.map((e) => e.muscles))
+      );
     });
   },
   async mounted() {
@@ -56,10 +72,11 @@ export default {
   computed: {
     exercises() {
       return this.$store.state.exercises;
-    }
+    },
   },
   methods: {
     resetLog() {
+      this.loading = true;
       this.log = {};
       this.workouts = [];
       this.addingExercise = false;
@@ -72,6 +89,7 @@ export default {
           date: this.currentDate,
         },
       });
+      this.loading = false;
       this.log = logResponse.data.length === 0 ? null : logResponse.data[0];
       // If we have no log exit; No need to get the workouts from a non-existing log
       if (logResponse.data.length === 0) return;
