@@ -35,7 +35,7 @@ export default {
       log: {},
       workouts: [],
       addingExercise: false,
-      currentDate: new Date().toLocaleDateString(),
+      currentDate: new Date().toISOString().split('T')[0],
     };
   },
   beforeMount() {
