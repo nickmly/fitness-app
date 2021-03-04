@@ -1,0 +1,33 @@
+input, select {
+  font-family: 'Source Sans Pro';
+  background: $light-grey;
+  padding: 10px;
+  border: 2px solid $dark-blue;
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 8px;
+}
+input:active,
+input:focus,
+select:active,
+select:focus {
+  border: 2px solid $light-blue;
+  outline: none;
+}
+button {
+  background: $dark-blue;
+  color: $white;
+  border: none;
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 8px;
+}
+button:active, button:focus {
+  background: $dark-blue;
+  border: 2px solid $light-blue;
+  padding: 8px;
+}
+button:hover {
+  background: $light-blue;
+}

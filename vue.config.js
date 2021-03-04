@@ -5,6 +5,10 @@ module.exports = {
         additionalData: `
           @import "@/scss/_colours.scss";
           @import "@/scss/_breakpoints.scss";
+          @import "@/scss/_layout.scss";
+          @import "@/scss/_input.scss";
+          @import "@/scss/_links.scss";
+          @import "@/scss/_lists.scss";
         `
       }
     }
