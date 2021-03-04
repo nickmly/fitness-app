@@ -16,14 +16,20 @@
           {{ muscleOpt }}
         </option>
       </select>
-      <input title="Equipment Required" type="text" placeholder="Equipment Required" v-model="equipment" />
+      <input
+        title="Equipment Required"
+        type="text"
+        placeholder="Equipment Required"
+        v-model="equipment"
+      />
       <button>Create</button>
     </form>
   </div>
 </template>
 <script>
-import { HTTP } from "../../axios";
+import requestMixin from "../../mixins/request";
 export default {
+  mixins: [requestMixin],
   data() {
     return {
       muscleOptions: this.$store.state.muscles,
@@ -34,13 +40,13 @@ export default {
   },
   methods: {
     createExercise() {
-      HTTP.post("/exercises", {
+      this.postRequest("/exercises", {
         title: this.title,
         muscles: this.muscles,
         equipment: this.equipment,
       }).then(() => {
         // Refresh exercises
-        HTTP.get("/exercises").then((response) => {
+        this.getRequest("/exercises").then((response) => {
           this.$store.commit("setExercises", response.data);
           this.$emit("goBack");
         });

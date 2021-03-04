@@ -7,9 +7,13 @@ const store = new Vuex.Store({
   state: {
     user: null,
     exercises: [],
-    muscles: []
+    muscles: [],
+    requestHeader: null
   },
   mutations: {
+    setRequestHeader(state, requestHeader) {
+      state.requestHeader = requestHeader;
+    },
     setUser(state, user) {
       state.user = user;
     },
@@ -18,6 +22,11 @@ const store = new Vuex.Store({
     },
     setMuscles(state, muscles) {
       state.muscles = muscles;
+    }
+  },
+  getters: {
+    requestHeader: state => {
+      return state.requestHeader;
     }
   }
 });
