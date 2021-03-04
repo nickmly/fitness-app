@@ -26,11 +26,14 @@ firebase.initializeApp(firebaseConfig);
 let app;
 firebase.auth().onAuthStateChanged(async (user) => {
   store.commit('setUser', user);
-  const token = await firebase.auth().currentUser.getIdToken();
-  let authHeader = {
-    Authorization: `Bearer ${token}`
-  };
-  store.commit('setRequestHeader', authHeader);
+  if (user) {
+    const token = await firebase.auth().currentUser.getIdToken();
+    let authHeader = {
+      Authorization: `Bearer ${token}`
+    };
+    store.commit('setRequestHeader', authHeader);
+  }
+  
   if (!app) {
     app = new Vue({
       render: h => h(App),

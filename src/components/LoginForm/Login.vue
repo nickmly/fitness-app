@@ -1,8 +1,8 @@
 <template>
-  <app-login-form 
-    title="Login" 
+  <app-login-form
+    title="Login"
     :error="error"
-    @onFormSubmit="onFormSubmit" 
+    @onFormSubmit="onFormSubmit"
     @changeEmail="email = $event"
     @changePassword="password = $event"
   />
@@ -24,7 +24,7 @@ export default {
   methods: {
     async onFormSubmit() {
       try {
-        await auth.login(this.email, this.password);
+        await auth.login(this.email, this.password);        
         this.$router.replace({ name: "log" });
       } catch (err) {
         this.error = err.message;
