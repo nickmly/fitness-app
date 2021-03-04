@@ -34,6 +34,8 @@
     </ul>
     <app-workout-set
       v-else
+      :weight="addingSetWeight"
+      :reps="addingSetReps"
       @addSet="addSet(exercise.workout_id)"
       @addWeight="addingSetWeight = $event"
       @addReps="addingSetReps = $event"

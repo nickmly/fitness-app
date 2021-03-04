@@ -3,7 +3,7 @@
     <h2>{{ title }}</h2>
     <p v-if="error !== ''">{{ error }}</p>
     <form class="login-form" @submit.prevent="$emit('onFormSubmit')">
-      <input type="email" @input="$emit('changeEmail', $event.target.value)" placeholder="Email" />
+      <input ref="email" type="email" @input="$emit('changeEmail', $event.target.value)" placeholder="Email" />
       <input type="password" @input="$emit('changePassword', $event.target.value)" placeholder="Password" />
       <button type="submit">{{ title }}</button>
     </form>
@@ -14,6 +14,9 @@ export default {
   props: {
     title: String,
     error: String
+  },
+  mounted() {
+    this.$refs.email.focus();
   }
 }
 </script>
