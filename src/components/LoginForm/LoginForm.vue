@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h2>{{ title }}</h2>
     <p v-if="error !== ''">{{ error }}</p>
     <form class="login-form" @submit.prevent="$emit('onFormSubmit')">

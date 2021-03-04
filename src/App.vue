@@ -25,6 +25,22 @@ body {
   background: $black;
   margin: 0;
 }
+.container {
+  margin: 0;
+}
+
+@media screen and (min-width: $large-screen) {
+  .container {
+    margin: 20px 140px;
+  }
+}
+
+@media screen and (min-width: $xl-screen) {
+  .container {
+    margin: 20px 280px;
+  }
+}
+
 a {
   color: $white;
   font-weight: bold;

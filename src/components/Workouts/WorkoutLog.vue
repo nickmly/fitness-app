@@ -1,5 +1,5 @@
 <template>
-  <div class="workout-log">
+  <div class="workout-log container">
     <input
     title="Select a date to view logs"
       class="date-picker"
@@ -209,20 +209,7 @@ export default {
 .workout-log {
   display: flex;
   flex-direction: column;
-  margin: 0;
   background: $dark-grey;
-}
-
-@media screen and (min-width: $large-screen) {
-  .workout-log {
-    margin: 20px 80px;
-  }
-}
-
-@media screen and (min-width: $xl-screen) {
-  .workout-log {
-    margin: 20px 220px;
-  }
 }
 
 .workout-log__list {

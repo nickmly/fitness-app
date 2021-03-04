@@ -3,10 +3,16 @@
     <header class="exercise-header">
       <h4>{{ exercise.title }}</h4>
       <div class="exercise-buttons">
-        <button title="Add Set" @click="showSetForm(exercise.workout_id)">
+        <button
+          :title="addSetButtonTitle"
+          @click="showSetForm(exercise.workout_id)"
+        >
           <font-awesome-icon icon="plus" />
         </button>
-        <button title="Delete Exercise" @click="deleteExercise(exercise.workout_id)">
+        <button
+          :title="deleteExerciseButtonTitle"
+          @click="deleteExercise(exercise.workout_id)"
+        >
           <font-awesome-icon icon="times" />
         </button>
       </div>
@@ -18,7 +24,10 @@
         :key="index"
       >
         <span>{{ set.weight }}lbs / {{ set.reps }} reps</span>
-        <button title="Delete Set" @click="deleteSet(set.id, exercise.workout_id)">
+        <button
+          :title="deleteSetButtonTitle"
+          @click="deleteSet(set.id, exercise.workout_id)"
+        >
           <font-awesome-icon icon="times" />
         </button>
       </li>
@@ -46,6 +55,17 @@ export default {
   },
   props: {
     exercise: Object,
+  },
+  computed: {
+    addSetButtonTitle() {
+      return "Add set for " + this.exercise.title;
+    },
+    deleteExerciseButtonTitle() {
+      return "Delete exercise " + this.exercise.title;
+    },
+    deleteSetButtonTitle() {
+      return "Delete set for " + this.exercise.title;
+    },
   },
   methods: {
     showSetForm(id) {
