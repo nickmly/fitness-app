@@ -7,7 +7,7 @@
       v-model="currentDate"
       v-if="!addingExercise"
     />
-    <template v-if="!loading">
+    <template v-if="!loading && !error">
       <button v-if="currentDate && !addingExercise" @click="showExerciseList">
         Add Exercise
       </button>
@@ -28,8 +28,11 @@
         <app-exercise-list :exercises="exercises" @addExercise="addExercise" />
       </div>
     </template>
-    <template v-else>
+    <template v-else-if="!error">
       <app-spinner />
+    </template>
+    <template v-else>
+      <p>Something went wrong. Please refresh the page and try again.</p>
     </template>
   </div>
 </template>
@@ -49,6 +52,7 @@ export default {
   data() {
     return {
       loading: true,
+      error: false,
       log: {},
       workouts: [],
       addingExercise: false,
@@ -56,13 +60,18 @@ export default {
     };
   },
   beforeMount() {
-    this.getRequest("/exercises").then((response) => {
-      this.$store.commit("setExercises", response.data);
-      this.$store.commit(
-        "setMuscles",
-        new Set(this.exercises.map((e) => e.muscles))
-      );
-    });
+    this.getRequest("/exercises")
+      .then((response) => {
+        this.$store.commit("setExercises", response.data);
+        this.$store.commit(
+          "setMuscles",
+          new Set(this.exercises.map((e) => e.muscles))
+        );
+      })
+      .catch(() => {
+        this.loading = false;
+        this.error = true;
+      });
   },
   async mounted() {
     await this.populateLog();
