@@ -10,6 +10,15 @@
       authentication, and MySQL to store all exercises and logs
     </p>
     <p>
+      You can login with a guest account using these very secure credentials:
+    </p>
+
+    <pre>
+        Username: guest
+        Password: password123
+      </pre
+    >
+    <p>
       This site is for demonstration purposes only. Click
       <a href="https://github.com/nickmly/fitness-app">here</a> to view the code
       for the front-end application and
