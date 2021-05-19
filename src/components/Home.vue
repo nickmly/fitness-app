@@ -14,7 +14,7 @@
     </p>
 
     <pre>
-        Username: guest
+        Username: guest@email.com
         Password: password123
       </pre
     >
